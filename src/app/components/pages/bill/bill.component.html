@@ -1,0 +1,319 @@
+<div class="card-body" style="background-color: #fff;">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToDashboard();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Add Item</span></div>
+        <div class="col-2"></div>
+    </div>
+
+    <nav class="mx-2">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+                [ngClass]="{'active': tabSelected === 1, 'in_active': tabSelected !== 1}" (click)="onTabChange(1)">
+                <i class="me-1"
+                    [ngClass]="{'bi bi-dash-circle-fill': tabSelected === 1,'bi bi-dash-circle': tabSelected === 2}"></i>Debit
+            </button>
+            <button class="nav-link" id="nav-Stage-tab" type="button" role="tab" aria-controls="nav-Stage"
+                [ngClass]="{'active': tabSelected === 2, 'in_active': tabSelected !== 2}" (click)="onTabChange(2)">
+                <i class="me-1"
+                    [ngClass]="{'bi bi-plus-circle-fill': tabSelected === 2,'bi bi-plus-circle': tabSelected === 1}"></i>Settlement
+            </button>
+        </div>
+    </nav>
+
+
+
+    <div class="tab-content" id="nav-tabContent">
+        <!-- Tab 1 -->
+        <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 1}" role="tabpanel"
+            aria-labelledby="nav-Roll-tab">
+            <div class="row tab-border mx-2 align-items-center">
+                <div class="col-md-12 mt-3">
+                    <form name="frmTab1" #frmTab1="ngForm" (ngSubmit)="frmTab1.form.valid && onClickSubmit(frmTab1)">
+                        <div class="row">
+                            <!-- Entry Date -->
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtEntryDateTab1"
+                                            name="txtEntryDateTab1" [(ngModel)]="record.EntryDate" placeholder=""
+                                            (change)="onEntryDateChange(record.EntryDate);" #txtEntryDateTab1="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtEntryDateTab1">
+                                            <i class="bi bi-calendar text-success me-1"></i>Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab1.submitted && txtEntryDateTab1.invalid">
+                                            <small class="text-danger" *ngIf="txtEntryDateTab1.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Amount -->
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtAmountTab1"
+                                            name="txtAmountTab1" maxlength="8" [(ngModel)]="record.Amount"
+                                            placeholder="" #txtAmountTab1="ngModel" required appNumberOnly>
+                                        <label class="my-label" for="txtAmountTab1">
+                                            <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab1.submitted && txtAmountTab1.invalid">
+                                            <small class="text-danger" *ngIf="txtAmountTab1.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control my-input" id="txtDescriptionTab1"
+                                        name="txtDescriptionTab1" maxlength="50" [(ngModel)]="record.Description"
+                                        placeholder="" #txtDescriptionTab1="ngModel" required>
+                                    <label class="my-label" for="txtDescriptionTab1">
+                                        <i class="bi bi-card-heading text-primary me-1"></i>Description
+                                        <span class="star text-danger ms-1">*</span>
+                                    </label>
+                                    <div *ngIf="frmTab1.submitted && txtDescriptionTab1.invalid">
+                                        <small class="text-danger" *ngIf="txtDescriptionTab1.errors?.['required']">
+                                            <i class="bi bi-exclamation-circle me-1"></i>Please enter description
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-outline-secondary" role="button">
+                                        <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2 -->
+        <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 2}" role="tabpanel"
+            aria-labelledby="nav-Roll-tab">
+            <div class="row tab-border mx-2 px-2 py-2 align-items-center">
+                <div *ngIf="!showSettleSec && !showSettleProcessSec && !showIndividual">
+                    <div class="col-12">
+                        <div class="row expan-div mb-2">
+                            <div class="col-4 b-1">
+                                <p class="tot-amt text-primary m-0"><i
+                                        class="bi bi-currency-rupee me-1"></i>{{SettlementDataIndividual.GrandTotalExpenditureAmount}}
+                                </p>
+                                <p class="m-0">Expenditure</p>
+                            </div>
+                            <div class="col-4 b-1">
+                                <p class="tot-amt text-info m-0"><i
+                                        class="bi bi-currency-rupee me-1"></i>{{SettlementDataIndividual.AmountPerHead}}
+                                </p>
+                                <p class="m-0">Individually</p>
+                            </div>
+                            <div class="col-4" (click)="onClickViewIndividual()">
+                                <p class="m-1"><i class="bi bi-arrow-bar-right me-1 view-ico"></i> <span
+                                        class="text-primary">View</span></p>
+                                <p class="text-primary m-0">Individual</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row py-2 mb-2 main-box" *ngFor="let i of AllSettlementDataUserWise">
+                        <div class="col-12"><span class="box-user">{{i.UserName}}</span></div>
+                        <div class="row">
+                            <div class="col-7">
+                                <div class="col-12"><span class="box-label">Total</span></div>
+                                <div class="col-12"><span class="box-amount"><i
+                                            class="bi bi-currency-rupee me-1"></i>{{i.SelfDebitedAmount}}</span></div>
+                            </div>
+                            <div class="col-5">
+                                <button class="btn btn-sm btn-pay" (click)="onClickSettle(i)"
+                                    *ngIf="(i.AmountToTake > 0) && (userDeatilInfo.UserID != i.UserID) && hasAmountToGive(userDeatilInfo.UserID)">
+                                    <i class="bi bi-shuffle me-1"></i>Settle
+                                </button>
+                                <button class="btn btn-notify btn-sm" (click)="onClickViewNotificattion(i)"
+                                    *ngIf="((SettlementProcessData.length>0) && (userDeatilInfo.UserID == i.UserID))"><i
+                                        class="bi bi-bell-fill me-1"></i><span
+                                        class="notify-count">{{SettlementProcessData.length}}</span></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="col-12"><span class="box-label">Amount To Take</span></div>
+                                <div class="col-12"><span class="text-success"><i
+                                            class="bi bi-currency-rupee me-1"></i>{{i.AmountToTake}}</span></div>
+                            </div>
+                            <div class="col-6">
+                                <div class="col-12"><span class="box-label">Amount To Give</span></div>
+                                <div class="col-12"><span class="text-danger"><i
+                                            class="bi bi-currency-rupee me-1"></i>{{i.AmountToGive}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" *ngIf="showSettleSec">
+                    <div class="row mb-2 text-end">
+                        <div class="col-10 text-center"><span class="page-header">Settle Amount</span></div>
+                        <div class="col-2"><i class="bi bi-x-lg text-danger" (click)="onClickCloseSettle();"></i></div>
+                    </div>
+                    <div class="row expan-div mb-3" style="background: #e5e5e547;">
+                        <div class="col-7">
+                            <p class="box-user m-0">{{record.DonationUserName}}</p>
+                            <p class="box-label m-0">have to receive</p>
+                        </div>
+                        <div class="col-5">
+                            <p class="box-amount pt-2 m-0"><i
+                                    class="bi bi-currency-rupee me-1"></i>{{record.DonationAmt}}</p>
+                        </div>
+                    </div>
+                    <form name="frmTab2" #frmTab2="ngForm" (ngSubmit)="frmTab2.form.valid && onClickSubmit(frmTab2)">
+                        <div class="row">
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtEntryDateTab2"
+                                            name="txtEntryDateTab2" [(ngModel)]="record.EntryDate" placeholder=""
+                                            (change)="onEntryDateChange(record.EntryDate);" #txtEntryDateTab2="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtEntryDateTab2">
+                                            <i class="bi bi-calendar text-success me-1"></i>Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtEntryDateTab2.invalid">
+                                            <small class="text-danger" *ngIf="txtEntryDateTab2.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtAmountTab2"
+                                            name="txtAmountTab2" maxlength="8" [(ngModel)]="record.Amount"
+                                            placeholder="" #txtAmountTab2="ngModel" required appNumberOnly>
+                                        <label class="my-label" for="txtAmountTab2">
+                                            <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtAmountTab2.invalid">
+                                            <small class="text-danger" *ngIf="txtAmountTab2.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control my-input" id="txtDescriptionTab2"
+                                        name="txtDescriptionTab2" maxlength="50" [(ngModel)]="record.Description"
+                                        placeholder="" #txtDescriptionTab2="ngModel" required>
+                                    <label class="my-label" for="txtDescriptionTab2">
+                                        <i class="bi bi-card-heading text-primary me-1"></i>Description
+                                        <span class="star text-danger ms-1">*</span>
+                                    </label>
+                                    <div *ngIf="frmTab2.submitted && txtDescriptionTab2.invalid">
+                                        <small class="text-danger" *ngIf="txtDescriptionTab2.errors?.['required']">
+                                            <i class="bi bi-exclamation-circle me-1"></i>Please enter description
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-outline-secondary" role="button">
+                                        <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12" *ngIf="showSettleProcessSec">
+                    <div class="row mb-2 text-end">
+                        <div class="col-10 text-center"><span class="page-header">Settlement Process</span></div>
+                        <div class="col-2"><i class="bi bi-x-lg text-danger" (click)="onClickCloseNotificattion();"></i>
+                        </div>
+                    </div>
+                    <div class="row expan-div mb-3" style="background: #e5e5e547;"
+                        *ngFor="let i of SettlementProcessData">
+                        <div class="col-9">
+                            <div class="col-12">
+                                <p class="box-label m-0">Have you received</p>
+                                <p class="box-amount text-success pt-2 m-0"><i
+                                        class="bi bi-currency-rupee me-1"></i>{{i.Amount}}</p>
+                            </div>
+                            <div class="col-12">
+                                <p class="box-label m-0">from</p>
+                                <p class="box-user m-0">{{i.UserName}}</p>
+                            </div>
+                        </div>
+                        <div class="col-3 mt-3">
+                            <button class="btn btn-info btn-accept" (click)="onClickAcceptSettlement(i.ID);"><i
+                                    class="bi bi-check-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" *ngIf="showIndividual">
+                    <div class="row mb-2 text-end">
+                        <div class="col-10 text-center"><span class="page-header">Individual View</span></div>
+                        <div class="col-2"><i class="bi bi-x-lg text-danger" (click)="onClickCloseIndivisual();"></i>
+                        </div>
+                    </div>
+                    <!-- <div class="row expan-div mb-3" style="background: #e5e5e547;">
+                        <div class="progress position-relative" role="progressbar" aria-label="Balance Indicator" *ngFor="let i of AllSettlementDataUserWise">
+                        <div
+                            class="progress-bar bg-danger progress-bar-left"
+                            *ngIf="i.AmountToGive > 0"
+                            [ngStyle]="{ width: (i.AmountToGive / SettlementDataIndividual.AmountPerHead) * 50 + '%' }"
+                          >
+                          </div>
+                          <div class="progress-center"></div>
+                          <div
+                            class="progress-bar bg-success progress-bar-right"
+                            *ngIf="i.AmountToTake > 0"
+                            [ngStyle]="{ width: (i.AmountToTake / SettlementDataIndividual.AmountPerHead) * 50 + '%' }"
+                          >
+                          </div>
+                        </div>
+                      </div> -->
+                    <div *ngFor="let i of AllSettlementDataUserWise" class="progress-wrapper">
+                        <!-- Username -->
+                        <div class="username">{{ i.UserName }}</div>
+                        <div class="user-tot-amt"><i class="bi bi-currency-rupee me-1"></i>{{ i.SelfDebitedAmount
+                            }}<span *ngIf="i.AmountToTake>0" class="text-success">( + {{i.AmountToTake}})</span><span
+                                *ngIf="i.AmountToGive>0" class="text-danger">( - {{i.AmountToGive}})</span></div>
+
+                        <div class="progress-container">
+                            <!-- Left (Red) for AmountToGive -->
+                            <div class="progress-bar bg-danger progress-bar-left" *ngIf="i.AmountToGive > 0"
+                                [ngStyle]="{ width: (i.AmountToGive / SettlementDataIndividual.AmountPerHead) * 50 + '%' }">
+                            </div>
+
+                            <!-- Center Marker -->
+                            <div class="progress-center"></div>
+
+                            <!-- Right (Green) for AmountToTake -->
+                            <div class="progress-bar bg-success progress-bar-right" *ngIf="i.AmountToTake > 0"
+                                [ngStyle]="{ width: (i.AmountToTake / SettlementDataIndividual.AmountPerHead) * 50 + '%' }">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

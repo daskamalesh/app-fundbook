@@ -1,0 +1,67 @@
+
+<div class="main-container">
+  <div class="container custom-container">
+    <div class="custom-header fg-fade-down">
+      <img src="../../../assets/images/loader_img.png" alt="Plant" class="plant-img">
+      <h4>Welcome to Fundbook</h4>
+      <p>Smart Finances, Smarter Future !</p>
+    </div>
+    <div class="login-form">
+      <form name="signin" #frmEntry="ngForm" (ngSubmit)="frmEntry.form.valid && login()">
+        <div class="row">
+          <div class="col-12 fg-fade-in mb-3">
+            <div class="form-group mb-0">
+              <input type="text" class="form-control my-input" id="txtUserId" name="txtUserId" maxlength="50"
+                placeholder="" required [(ngModel)]="record.UserName" #txtUserId="ngModel"
+                [ngClass]="{ 'is-invalid': frmEntry.submitted && txtUserId.invalid  }">
+              <label class="my-label" for="txtUserId">
+                <i class="bi bi-person me-1"></i>Username<span class="star text-danger ms-1">*</span>
+              </label>
+              <div class="validation-msg" *ngIf="frmEntry.submitted && txtUserId.invalid">
+                <small class="text-danger" *ngIf="txtUserId.errors?.['required']">
+                  <i class="bi bi-exclamation-circle me-1"></i>Please enter username
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 fg-fade-in mb-3">
+            <div class="form-group mb-0">
+              <input [type]="isShowPassword ? 'text':'password'" class="form-control my-input" id="txtPassword"
+                name="txtPassword" maxlength="50" placeholder="" required minlength="6" [(ngModel)]="record.Password"
+                #txtPassword="ngModel" [ngClass]="{ 'is-invalid': frmEntry.submitted && txtPassword.invalid  }">
+              <label class="my-label" for="txtPassword">
+                <i class="bi bi-shield-lock me-1"></i>Password<span class="star text-danger ms-1">*</span>
+              </label>
+              <label class="eye-btn" for="txtPassword">
+                <i class="bi" [ngClass]="{'bi-eye-fill':!isShowPassword, 'bi-eye-slash-fill':isShowPassword}"
+                  (click)="onClickShowPassword();"></i>
+              </label>
+              <div class="validation-msg" *ngIf="frmEntry.submitted && txtPassword.invalid">
+                <small class="text-danger" *ngIf="txtPassword.errors?.['required']">
+                  <i class="bi bi-exclamation-circle me-1"></i>Please enter password
+                </small>
+              </div>
+            </div>
+          </div>
+          <small *ngIf="loginError">
+            <p class="wrong-cred">*Wrong username or password. Try again!</p>
+          </small>
+          <div class="col-12 fg-fade-up">
+            <a href="#" class="d-block text-end text-decoration-none text-success">Forgot Password?</a>
+            <button class="login-btn mt-3"><i class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="signup fg-fade-up mt-3">
+      Don't have an account? <a href="#" class="text-success fw-bold">Sign Up</a>
+    </div>
+  </div>
+  <!-- <footer>
+    <div class="container-fluid px-0">
+      <div class="col-12">
+      <img class="f-img" src="../../../assets/images/login_footer.png">
+    </div>
+    </div>
+  </footer> -->
+</div>

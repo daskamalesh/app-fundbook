@@ -1,0 +1,174 @@
+@keyframes fadeUp {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fg-fade-up {
+  animation: fadeUp 0.9s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fg-fade-in {
+  animation: fadeInScale 0.9s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-10px) scale(0.9);
+    /* Start slightly above */
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    /* Move to normal position */
+    opacity: 1;
+  }
+}
+
+.fg-fade-down {
+  animation: fadeInDown 0.9s ease-in-out;
+}
+
+
+
+.main-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background: url(../../../assets/images/logout_background.png) no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.custom-container {
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+}
+
+.custom-header img {
+  width: 44%;
+}
+
+.custom-header h4 {
+  font-weight: 600;
+}
+
+.custom-header p {
+  color: gray;
+}
+
+.login-form {
+  margin-top: 50% !important;
+  padding: 30px 10px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.card-text{
+  color: darkslategray;
+}
+.login-btn {
+  padding: 12px;
+  background-color: #005F50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-btn a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    height: auto;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .custom-header {
+    padding: 30px 15px;
+  }
+
+  .custom-header h1 {
+    font-size: 24px;
+  }
+
+  .custom-header p {
+    font-size: 14px;
+  }
+
+  .login-form {
+    margin-top: 30px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+  }
+}
+
+.validation-msg {
+  text-align: left;
+  position: absolute;
+  left: 10px;
+  top: 48px;
+}
+
+.eye-btn {
+  position: absolute;
+  top: 12px;
+  right: 28px;
+  color: gray;
+}
+
+.wrong-cred {
+  margin-top: -6px;
+  margin-bottom: 0.5rem;
+  color: red;
+}
+
+.f-img {
+  width: 100%;
+  height: 140px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+.right-ico {
+  font-size: 1.5rem;
+  background: #e1edf1;
+  color: #00b4fd;
+  padding: 20px 22px;
+  border-radius: 5px;
+}

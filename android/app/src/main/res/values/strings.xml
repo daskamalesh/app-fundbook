@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">FundBook</string>
+    <string name="title_activity_main">FundBook</string>
+    <string name="package_name">fundbooks.bsite.net</string>
+    <string name="custom_url_scheme">fundbooks.bsite.net</string>
+</resources>

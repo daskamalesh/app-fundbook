@@ -1,0 +1,300 @@
+<div class="card-body" style="background-color: #fff;">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToDashboard();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Add Utilities</span></div>
+        <div class="col-2"></div>
+    </div>
+
+    <nav class="mx-2">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+                [ngClass]="{'active': tabSelected === 1, 'in_active': tabSelected !== 1}" (click)="onTabChange(1)">
+                <i class="me-1"
+                    [ngClass]="{'bi bi-droplet-fill': tabSelected === 1,'bi bi-droplet': tabSelected !== 1}"></i>Water
+            </button>
+            <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+                [ngClass]="{'active': tabSelected === 2, 'in_active': tabSelected !== 2}" (click)="onTabChange(2)">
+                <i class="me-1"
+                    [ngClass]="{'bi bi-plug-fill': tabSelected === 2,'bi bi-plug': tabSelected !== 2}"></i>Electric
+            </button>
+            <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+                [ngClass]="{'active': tabSelected === 3, 'in_active': tabSelected !== 3}" (click)="onTabChange(3)">
+                <i class="me-1"
+                    [ngClass]="{'bi bi-houses-fill': tabSelected === 3,'bi bi-houses': tabSelected !== 3}"></i>Rent
+            </button>
+        </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+        <!-- Tab 1 -->
+        <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 1}" role="tabpanel"
+            aria-labelledby="nav-Roll-tab">
+            <div class="row tab-border py-3 mx-2 align-items-center">
+                <div class="col-md-12 mt-3">
+                    <form name="frmTab1" #frmTab1="ngForm" (ngSubmit)="frmTab1.form.valid && onClickSubmit(frmTab1)">
+                        <div class="row">
+                            <!-- Entry Date -->
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtEntryDateTab1"
+                                            name="txtEntryDateTab1" [(ngModel)]="record.EntryDate" placeholder=""
+                                            (change)="onEntryDateChange(record.EntryDate);" #txtEntryDateTab1="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtEntryDateTab1">
+                                            <i class="bi bi-calendar text-success me-1"></i>Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab1.submitted && txtEntryDateTab1.invalid">
+                                            <small class="text-danger" *ngIf="txtEntryDateTab1.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Amount -->
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtQuantity"
+                                            name="txtQuantity" maxlength="2" [(ngModel)]="record.Quantity"
+                                            placeholder="" #txtQuantity="ngModel" required appNumberOnly>
+                                        <label class="my-label" for="txtQuantity">
+                                            <i class="bi bi-123 text-primary me-1"></i>Quantity
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab1.submitted && txtQuantity.invalid">
+                                            <small class="text-danger" *ngIf="txtQuantity.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter quantity
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control my-input" id="txtAmountTab1"
+                                        name="txtAmountTab1" maxlength="8" [(ngModel)]="record.Amount" placeholder=""
+                                        #txtAmountTab1="ngModel" required appNumberOnly>
+                                    <label class="my-label" for="txtAmountTab1">
+                                        <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                        <span class="star text-danger ms-1">*</span>
+                                    </label>
+                                    <div *ngIf="frmTab1.submitted && txtAmountTab1.invalid">
+                                        <small class="text-danger" *ngIf="txtAmountTab1.errors?.['required']">
+                                            <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-outline-secondary" role="button">
+                                        <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2 -->
+        <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 2}" role="tabpanel"
+            aria-labelledby="nav-Roll-tab">
+            <div class="row tab-border py-3 mx-2 align-items-center">
+                <div class="col-md-12 mt-3">
+                    <form name="frmTab2" #frmTab2="ngForm" (ngSubmit)="frmTab2.form.valid && onClickSubmit(frmTab2)">
+                        <div class="row">
+                            <!-- Entry Date -->
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtFromDate"
+                                            name="txtFromDate" [(ngModel)]="record.FromDate" placeholder=""
+                                            (change)="onEntryDateChange(record.FromDate);" #txtFromDate="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtFromDate">
+                                            <i class="bi bi-calendar text-success me-1"></i>From Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtFromDate.invalid">
+                                            <small class="text-danger" *ngIf="txtFromDate.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select from date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtToDate" name="txtToDate"
+                                            [(ngModel)]="record.ToDate" placeholder=""
+                                            (change)="onEntryDateChange(record.ToDate);" #txtToDate="ngModel" required>
+                                        <label class="my-label" for="txtToDate">
+                                            <i class="bi bi-calendar2 text-success me-1"></i>To Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtToDate.invalid">
+                                            <small class="text-danger" *ngIf="txtToDate.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select to date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 px-3">
+                                <div class="form-group">
+                                    
+                                    <select class="form-control my-select" id="cmbMonth" name="cmbMonth" aria-label="User Type"
+                                        #cmbMonth="ngModel"
+                                        [ngClass]="{ 'is-invalid': frmTab2.submitted && cmbMonth.invalid  }"
+                                        required="required" [(ngModel)]="record.MonthID">
+                                        <option *ngFor="let m of allMonths; let i = index "
+                                            [value]="m.ID"
+                                            [selected]="record.MonthID == m.ID">
+                                            {{m.Description}}
+                                        </option>
+                                    </select>
+                                    <label class="my-label" for="txtEntryDate">
+                                        <i class="bi bi-ccalendar me-1"></i>Month<span class="star text-danger ms-1">*</span>
+                                    </label>
+                                    <div *ngIf="frmTab2.submitted && cmbMonth.invalid">
+                                        <small class="text-danger" *ngIf="cmbMonth.errors?.['required']">
+                                            <i class="bi bi-exclamation-circle me-1"></i>Please select month
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Unit -->
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtUnit" name="txtUnit"
+                                            maxlength="8" [(ngModel)]="record.Unit" placeholder="" #txtUnit="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtUnit">
+                                            <i class="bi bi-123 text-primary me-1"></i>Unit
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtUnit.invalid">
+                                            <small class="text-danger" *ngIf="txtUnit.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter unit
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Amount -->
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtAmountTab2"
+                                            name="txtAmountTab2" maxlength="8" [(ngModel)]="record.Amount"
+                                            placeholder="" #txtAmountTab2="ngModel" required appNumberOnly>
+                                        <label class="my-label" for="txtAmountTab2">
+                                            <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab2.submitted && txtAmountTab2.invalid">
+                                            <small class="text-danger" *ngIf="txtAmountTab2.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mx-1">
+                                <div class="form-group">
+                                    <input type="text" class="form-control my-input" id="txtDescription" name="txtDescription"
+                                        maxlength="50" [(ngModel)]="record.Description" placeholder="" #txtDescription="ngModel"
+                                        required>
+                                    <label class="my-label" for="txtDescription">
+                                        <i class="bi bi-card-text text-primary me-1"></i>Description
+                                        <span class="star text-danger ms-1">*</span>
+                                    </label>
+                                    <div *ngIf="frmTab2.submitted && txtDescription.invalid">
+                                        <small class="text-danger" *ngIf="txtDescription.errors?.['required']">
+                                            <i class="bi bi-exclamation-circle me-1"></i>Please enter description
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-outline-secondary" role="button">
+                                        <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3 -->
+        <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 3}" role="tabpanel"
+            aria-labelledby="nav-Roll-tab">
+            <div class="row tab-border py-3 mx-2 align-items-center">
+                <div class="col-md-12 mt-3">
+                    <form name="frmTab3" #frmTab3="ngForm" (ngSubmit)="frmTab3.form.valid && onClickSubmit(frmTab3)">
+                        <div class="row">
+                            <!-- Entry Date -->
+                            <div class="col-md-6 d-flex">
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="date" class="form-control my-input" id="txtEntryDate"
+                                            name="txtEntryDate" [(ngModel)]="record.EntryDate" placeholder=""
+                                            (change)="onEntryDateChange(record.EntryDate);" #txtEntryDate="ngModel"
+                                            required>
+                                        <label class="my-label" for="txtEntryDate">
+                                            <i class="bi bi-calendar text-success me-1"></i>Date
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab3.submitted && txtEntryDate.invalid">
+                                            <small class="text-danger" *ngIf="txtEntryDate.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please select date
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Amount -->
+                                <div class="col-6 px-1">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control my-input" id="txtAmountTab2"
+                                            name="txtAmountTab2" maxlength="8" [(ngModel)]="record.Amount"
+                                            placeholder="" #txtAmountTab2="ngModel" required appNumberOnly >
+                                        <label class="my-label" for="txtAmountTab2">
+                                            <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                            <span class="star text-danger ms-1">*</span>
+                                        </label>
+                                        <div *ngIf="frmTab3.submitted && txtAmountTab2.invalid">
+                                            <small class="text-danger" *ngIf="txtAmountTab2.errors?.['required']">
+                                                <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                                <div class="col-md-12 text-center">
+                                    <button class="btn btn-outline-secondary" role="button">
+                                        <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

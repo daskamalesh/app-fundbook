@@ -1,0 +1,181 @@
+.nav-link.in_active {
+  color: #747474 !important;
+  border-color: #ddd !important;
+  border-bottom: 1px solid darkviolet !important;
+  background: #f9f9f9 !important;
+}
+
+.nav-link.active {
+  background: #fff !important;
+  color: darkviolet !important;
+  border-top: 2px solid darkviolet !important;
+  border-color: darkviolet !important;
+  border-bottom: none !important;
+}
+
+.tab-border {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: 1px solid #bf90d3;
+  border-radius: 0px 0px 4px 4px;
+}
+.tab-spec{
+  font-size: .7rem;
+}
+
+.section-total {
+  position: relative;
+}
+
+.section-total:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  content: "";
+  display: block;
+  margin-top: 0px;
+  height: 120px;
+  background: darkviolet;
+}
+
+.main-sec {
+  overflow-x: hidden;
+}
+
+.tot-expan {
+  color: darkblue;
+  font-weight: 600;
+  margin-top: 32%;
+  font-size: .9rem;
+}
+
+.tot-expan-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.expan-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 20%;
+  font-size: .7rem;
+}
+
+.expan-li {
+  color: darkblue;
+}
+
+.act-label {
+  color: black;
+  font-weight: 600;
+}
+
+.act-label2 {
+  color: gray;
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.dash-card {
+  padding: 5px 10px;
+}
+
+.dash-card .dash-label {
+  color: gray;
+  font-size: .8rem;
+}
+
+.dash-card .dash-count {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tran-body {
+  padding: 12px 10px 5px 10px;
+}
+
+.tran-card .tran-image i {
+  font-size: 1.5rem;
+  background: #c4e9f5;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+.tran-card .tran-owner {
+  font-size: 1rem;
+  font-weight: 600;
+  color: darkblue;
+}
+
+.tran-card .tran-desc {
+  font-size: .8rem;
+  color: gray;
+}
+
+.tran-card .tran-label {
+  font-size: .8rem;
+  color: darkslategray;
+}
+
+.tran-amt {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.btn-hover2 {
+  cursor: pointer;
+}
+
+/* //horizontal scrolling---------------------- */
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.scroll-item {
+  flex: 0 0 auto;
+  width: 100px;
+  scroll-snap-align: start;
+}
+
+.hor-icon {
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0px 10px !important;
+  padding: 10px 10px;
+  border-radius: 5px;
+  background: beige;
+}
+
+.hor-des {
+  font-size: .9rem;
+  font-weight: 600;
+  color: darkmagenta;
+  padding-top: 4px;
+  margin: 0;
+  text-align: center;
+}
+.imt-date{
+  color:darkgoldenrod
+}
+.ent-date{
+  color:blue;
+}
+.v-mid{
+  vertical-align: middle;
+}

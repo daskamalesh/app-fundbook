@@ -1,0 +1,22 @@
+<div class="modal" tabindex="-1" [ngClass]="{'show': showPopUp}" style="display: block; background: #0606061c;" *ngIf="showPopUp">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" [ngClass]="modalData.msgHeaderClass">
+          <h5 class="modal-title">{{ modalData.msgHeader }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closePopUp()"></button>
+        </div>
+        <div class="modal-body">
+          <p [ngClass]="modalData.msgClass">
+            <i [class]="modalData.iconClass"></i> {{ modalData.msg }}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closePopUp()" *ngIf="modalData.showCancel">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-primary" (click)="OkPopUp()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

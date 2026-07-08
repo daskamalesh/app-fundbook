@@ -1,0 +1,13 @@
+.main-card {
+    font-size: .8rem;
+    background-color: #fff;
+}
+.imt-date{
+    color:darkgoldenrod
+}
+.ent-date{
+    color:blue;
+}
+.v-mid{
+    vertical-align: middle;
+}

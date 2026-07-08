@@ -1,0 +1,205 @@
+@keyframes shake {
+  20% {
+    transform: rotate(15deg);
+  }
+
+  40% {
+    transform: rotate(-15deg);
+    scale: 1.1;
+  }
+
+  60% {
+    transform: rotate(10deg);
+    scale: 1.1;
+  }
+
+  80% {
+    transform: rotate(-10deg);
+  }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.nav-link.in_active {
+  color: #747474 !important;
+  border-color: #ddd !important;
+  border-bottom: 1px solid darkviolet !important;
+  background: #f9f9f9 !important;
+}
+
+.nav-link.active {
+  background: #fff !important;
+  color: darkviolet !important;
+  border-top: 2px solid darkviolet !important;
+  border-color: darkviolet !important;
+  border-bottom: none !important;
+}
+
+.tab-border {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: 1px solid #bf90d3;
+  border-radius: 0px 0px 4px 4px;
+}
+
+.main-box {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #daa520cc;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.box-user {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.box-label {
+  font-size: .8rem;
+  color: lightslategray;
+}
+
+.box-amount {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.t-success {
+  font-size: 1.2rem;
+  color: green;
+}
+
+.t-danger {
+  font-size: 1.2rem;
+  color: red;
+}
+
+.btn-pay {
+  border-radius: 20px;
+  background: #d91d50;
+  color: white;
+  border: none;
+}
+
+.expan-div {
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  font-size: .8rem;
+  color: gray;
+}
+
+.tot-amt {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.b-1 {
+  border-right: 1px solid lightgray;
+}
+
+.view-ico {
+  padding: 4px;
+  border-radius: 5px;
+  color: darkblue;
+  background: #add8e6a6;
+}
+
+.page-header {
+  color: darkblue;
+  font-weight: 600;
+}
+
+.btn-notify {
+  background: #2bd370;
+  color: #fff;
+  border-radius: 10px;
+  position: relative;
+  padding: 6px 8px;
+}
+
+.btn-notify i {
+  display: inline-block;
+  animation: shake 0.8s ease-in-out infinite;
+}
+
+.btn-notify .notify-count {
+  position: absolute;
+  top: -3px;
+  left: 20px;
+}
+
+.btn-accept {
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+}
+
+/* progress bar style */
+.progress-wrapper {
+  margin-bottom: 15px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 15px 10px 20px 10px;
+}
+
+.username {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 3px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.user-tot-amt {
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.user-tot-amt span {
+  font-size: 1rem;
+  margin-left: 5px;
+}
+
+.progress-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-left {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-100%);
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-bar-right {
+  position: absolute;
+  left: 50%;
+  transform: translateX(0%);
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.progress-center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: #000000;
+  z-index: 2;
+}

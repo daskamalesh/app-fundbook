@@ -1,0 +1,32 @@
+.card{
+    border: none;
+    /* margin: 0 30%; */
+    height: 37vh;
+    text-align: center;
+    background-color: #2124238a;
+    top: 59px;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .card-body i{
+    font-size: 59px;
+    color: #ffb705;
+  }
+  .card-body h5{
+    color: white;
+    font-size: 34px;
+  }
+  .card-body p{
+    color: white;
+  
+  }
+  .footer{
+    margin-bottom: 20px;
+  }
+  .footer i{
+   font-size: 20px;
+  }
+  
+  
+  
+  

@@ -1,0 +1,18 @@
+<div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToProfile();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">All Users</span></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="row my-3 mx-1">
+            <div class="col-6" *ngFor="let i of AllUsers">
+                <div class="card mb-1 pro-card">
+                    <i class="bi bi-person"></i> 
+                    <h3>{{i.UserName}}</h3>
+                    <p>{{i.FullName}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

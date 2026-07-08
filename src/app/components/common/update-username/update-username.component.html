@@ -1,0 +1,57 @@
+<div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToProfile();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Update Username</span></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-md-12 py-3 my-3">
+            <form name="frmTab1" #frmTab1="ngForm" (ngSubmit)="frmTab1.form.valid && onClickSubmit(frmTab1)">
+                <div class="row">
+                    <!-- Description -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtOldUsername"
+                                name="txtOldUsername" maxlength="20" [(ngModel)]="record.UserName" placeholder="" [disabled]="true"
+                                #txtOldUsername="ngModel" required>
+                            <label class="my-label" for="txtOldUsername">
+                                <i class="bi bi-card-heading text-primary me-1"></i>Current Username
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab1.submitted && txtOldUsername.invalid">
+                                <small class="text-danger" *ngIf="txtOldUsername.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter current username
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtNewUsername"
+                                name="txtNewUsername" maxlength="10" [(ngModel)]="record.NewUsername" placeholder=""
+                                #txtNewUsername="ngModel" required>
+                            <label class="my-label" for="txtNewUsername">
+                                <i class="bi bi-person-vcard text-primary me-1"></i>New Username
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab1.submitted && txtNewUsername.invalid">
+                                <small class="text-danger" *ngIf="txtNewUsername.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter new username
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-outline-secondary" role="button">
+                                <i class="bi bi-save2" style="margin-right: 5px;"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

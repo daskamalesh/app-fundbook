@@ -1,0 +1,182 @@
+<div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToDashboard();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Budget</span></div>
+        <div class="col-2"></div>
+    </div>
+    <!-- <div class="row mx-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-12 mt-3">
+            <form name="signin" #frmSearch="ngForm" (ngSubmit)="frmSearch.form.valid && onClickView()">
+                <div class="row">
+                    <div class="col-md-6 d-flex">
+                        <div class="col-6 px-1">
+                            <div class="form-group">
+                                <select class="form-control my-select" id="cmbMonth" name="cmbMonth" aria-label="User Type"
+                                    #cmbMonth="ngModel" (change)="onChangeFilter()" 
+                                    [ngClass]="{ 'is-invalid': frmSearch.submitted && cmbMonth.invalid  }"
+                                    required="required" [(ngModel)]="record.MonthID">
+                                    <option *ngFor="let m of AllMonths; let i = index "
+                                        [value]="m.ID"
+                                        [selected]="record.MonthID == m.ID">
+                                        {{m.Description}}
+                                    </option>
+                                </select>
+                                <label class="my-label" for="txtEntryDate">
+                                    <i class="bi bi-ccalendar me-1"></i>Month<span class="star text-danger ms-1">*</span>
+                                </label>
+                                <div *ngIf="frmSearch.submitted && cmbMonth.invalid">
+                                    <small class="text-danger" *ngIf="cmbMonth.errors?.['required']">
+                                        <i class="bi bi-exclamation-circle me-1"></i>Please select month
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 px-1">
+                            <div class="switch_wrapper mt-2">
+                                <label class="switch">
+                                    <input type="checkbox" id="chkInActive" name="chkInActive" (change)="onChangeFilter()" [(ngModel)]="record.showOnlyMine" #chkInActive="ngModel">
+                                    <span class="slider round" title="{{record.showOnlyMine==true?'Yes':'No'}}"></span>
+                                </label>
+                                <label for="chkInActive" class="switch_name ms-1">Only mine</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> -->
+   
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" *ngIf="step==1">
+        <div class="col-6 py-2">
+            <button class="btn btn-outline-primary btn-sm" role="button" (click)="onClickCreate();">
+                <i class="bi bi-plus" style="margin-right: 5px;"></i>Create
+            </button>
+        </div>
+        <div class="col-12 mb-2 p-1">
+            <div class="table-responsive common_Table">
+                <table id="example"
+                    class="display table table-bordered table-striped table-hover" style="width: 100%">
+                    <colgroup>
+                        <col style="width: 8%" />
+                        <col style="width: 12%" />
+                        <col style="width: 18%" />
+                        <col style="width: 18%" />
+                        <col style="width: 15%" />
+                        <col style="width: 29%" />
+                    </colgroup>
+                    <thead style="background-color: #69757d">
+                        <tr>
+                            <th class="text-center">Sl</th>
+                            <th class="text-center">Month</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">IsCurrent</th>
+                            <th class="text-center">Deactive</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of returnResult; let i = index">
+                            <td class="text-center v-mid" style="border-radius: 5px;"
+                                [ngStyle]="{'border-left':item.IsActive===true ? '2px solid red' : '2px solid green' }">
+                                {{ i + 1 }}
+                            </td>
+                            <td class="text-start v-mid">{{ item.MonthName }}</td>
+                            <td class="text-end v-mid">{{ item.Amount }}</td>
+                            <td class="text-center v-mid">{{ item.IsCurrent }}</td>
+                            <td class="text-center v-mid">{{ item.IsActive }}</td>
+                            <td class="text-center v-mid">
+                                <div class="d-flex justify-content-around">
+                                    <button class="btn btn-outline-secondary btn-sm" role="button" (click)="onClickEdit(item)">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm" role="button" (click)="onClickDelete(item)">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" *ngIf="step==2">
+    <div class="col-md-12 mt-3">
+        <form name="frmTab" #frmTab="ngForm" (ngSubmit)="frmTab.form.valid && onClickSubmit(frmTab)">
+            <div class="row">
+                <!-- Entry Date -->
+                <div class="col-md-6 d-flex">
+                    <div class="col-6 px-1">
+                        <div class="form-group">
+                            <select class="form-control my-select" id="cmbMonth" name="cmbMonth" aria-label="Month"
+                                #cmbMonth="ngModel" (change)="onChangeMonth(record.MonthID)"
+                                [ngClass]="{ 'is-invalid': frmTab.submitted && cmbMonth.invalid  }"
+                                required="required" [(ngModel)]="record.MonthID">
+                                <option *ngFor="let m of AllMonths; let i = index "
+                                    [value]="m.ID"
+                                    [selected]="record.MonthID == m.ID">
+                                    {{m.Description}}
+                                </option>
+                            </select>
+                            <label class="my-label" for="txtEntryDate">
+                                <i class="bi bi-calendar me-1"></i>Month<span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab.submitted && cmbMonth.invalid">
+                                <small class="text-danger" *ngIf="cmbMonth.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please select month
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="col-6 px-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtAmountTab1"
+                                name="txtAmountTab1" maxlength="8" [(ngModel)]="record.Amount"
+                                placeholder="" #txtAmountTab1="ngModel" required appNumberOnly>
+                            <label class="my-label" for="txtAmountTab1">
+                                <i class="bi bi-currency-rupee text-danger me-1"></i>Amount
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab.submitted && txtAmountTab1.invalid">
+                                <small class="text-danger" *ngIf="txtAmountTab1.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter amount
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="switch_wrapper mt-2">
+                            <label class="switch">
+                                <input type="checkbox" id="chkInCurrent" name="chkInCurrent" [(ngModel)]="record.IsCurrent" #chkInCurrent="ngModel">
+                                <span class="slider round" title="{{record.IsCurrent==true?'Yes':'No'}}"></span>
+                            </label>
+                            <label for="chkInCurrent" class="switch_name ms-1">Is Current</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="switch_wrapper mt-2">
+                            <label class="switch">
+                                <input type="checkbox" id="chkInActive" name="chkInActive" [(ngModel)]="record.IsActive" #chkInActive="ngModel">
+                                <span class="slider round" title="{{record.IsActive==true?'Yes':'No'}}"></span>
+                            </label>
+                            <label for="chkInActive" class="switch_name ms-1">Is Active</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Save Button -->
+                <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-outline-secondary" role="button">
+                            <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

@@ -1,0 +1,25 @@
+export const environment = {
+  production: true,
+  // apiUrl: 'https://fundbooks.bsite.net/',
+  apiUrl: 'https://fundbook.runasp.net/',
+  urlApiUserAuth: 'loginapi/Authentication/',
+  urlApiItem:'loginapi/Item/',
+  urlApiMaster:'loginapi/Master/',
+  urlApiUtility:'loginapi/Utility/',
+  urlApiCommon:'loginapi/Common/',
+  urlApiDashboard:'loginapi/Dashboard/',
+  urlApiBackup:'loginapi/Backup/',
+  // urlApiMaster: 'PGEMSSetupAPI/gemsapi/',
+  // urlApiNomination: 'PGEMSNominationAPI/gemsapi/',
+  // urlApiPrePoll: 'PGEMSPrePollAPI/gemsapi/',
+  // urlApiPollDay: 'PGEMSPollDayAPI/gemsapi/',
+  // urlApiPostResult: 'PGEMSPollResultAPI/gemsapi/',
+  // urlApiUtility: 'PGEMSUtilityAPI/gemsapi/',
+  // urlApiCaptcha: 'PGEMSCaptchaAPI/gemsapi/',
+  // urlApiConfiguration: 'PGEMSConfigurationAPI/gemsapi/',
+  // urlApiReport: 'PGEMSReportAPI/gemsapi/',
+  // urlApiMaintenance: 'PGEMSMaintenanceAPI/gemsapi/',
+
+  //
+  UrlGetIp: 'https://jsonip.com/',
+};

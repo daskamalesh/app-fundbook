@@ -1,0 +1,86 @@
+<div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToDashboard();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Grocery</span></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-md-12 my-3">
+            <form name="frmTab1" #frmTab1="ngForm" (ngSubmit)="frmTab1.form.valid && onClickSubmit(frmTab1)">
+                <div class="row">
+                    <!-- Description -->
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtDescriptionTab1"
+                                name="txtDescriptionTab1" maxlength="50" [(ngModel)]="record.Description" placeholder=""
+                                #txtDescriptionTab1="ngModel" required>
+                            <label class="my-label" for="txtDescriptionTab1">
+                                <i class="bi bi-card-heading text-primary me-1"></i>Description
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab1.submitted && txtDescriptionTab1.invalid">
+                                <small class="text-danger" *ngIf="txtDescriptionTab1.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter description
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Entry Date -->
+                    <div class="col-md-6 d-flex px-2">
+                        <div class="col-12 px-1 mb-3">
+                            <div class="input-group">
+                                <input class="form-control c-input" name="txtQuantity" id="txtQuantity" type="text"
+                                    maxlength="5" [(ngModel)]="record.Quantity" placeholder="Count"
+                                    #txtQuantity="ngModel" required>
+                                <div class="input-group-btn">
+                                    <div class="btn-group">
+                                        <select class="form-control c-dropdown px-4" id="cmbType" name="cmbType"
+                                            aria-label="User Type" #cmbType="ngModel"
+                                            [ngClass]="{ 'is-invalid': frmTab1.submitted && cmbType.invalid  }"
+                                            required="required" [(ngModel)]="record.QuantityTypeID">
+                                            <option *ngFor="let m of AllQuantityType; let i = index " [value]="m.ID"
+                                                [selected]="record.QuantityTypeID == m.ID">
+                                                {{m.QuantityType}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="frmTab1.submitted && txtQuantity.invalid">
+                                <small class="text-danger" *ngIf="txtQuantity.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter quantity
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-outline-secondary" role="button">
+                                <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-lg-12 p-1">
+            <ul class="gros-ul mb-1" *ngFor="let i of AllGrocery; let index = index;">
+                <li class="gros-li mg-fade-up">
+                    <div class="row">
+                        <div class="col-1">{{index + 1}}.</div>
+                        <div class="col-7">
+                            <div class="col-6">{{i.Description}}</div>
+                            <div class="col-6 gros-user">By - {{i.UserName}}</div>
+                            </div>
+                        <div class="col-2">{{i.Quantity}}{{i.QuantityType}}</div>
+                        <div class="col-2"><i class="bi bi-trash-fill text-danger" (click)="onClickDelete(i.ID)"></i></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+
+.pro-card {
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.pro-card i {
+    padding: 10px 0px;
+    margin: 0px 20px;
+    background: #e0edf1;
+    color: darkblue;
+    font-size: 1.6rem;
+    border-radius: 5px;
+}
+
+
+.pro-card h3 {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    color: darkmagenta;
+}
+
+
+.pro-card p {
+    font-size: .8rem;
+    color: #0c53c1;
+    margin-bottom: 2px;
+}

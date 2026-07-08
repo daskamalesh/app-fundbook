@@ -1,0 +1,475 @@
+<div class="main-sec" *ngIf="step==1">
+  <div class="section-total pt-3">
+    <div class="card mb-3 mx-2">
+      <div class="card-body p-1">
+        <div class="row">
+
+          <div class="col-4">
+            <ul class="expan-ul">
+              <li class="expan-li" *ngFor="let i of AllExpanditure" [ngStyle]="{ 'color': i.color }">
+                <i class="bi bi-dot me-1"></i>{{ i.UserName }} - {{ i.TotalExpenditure }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-3 p-0">
+            <div id="chart">
+              <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [plotOptions]="chartOptions.plotOptions" [labels]="chartOptions.labels" [legend]="chartOptions.legend"
+                [colors]="chartOptions.colors"></apx-chart>
+            </div>
+          </div>
+          <div class="col-5 text-center">
+            <div class="d-block">
+              <div class="tot-expan">Total Expenditure</div>
+              <div class="tot-expan-value">{{ GrandTotalExpanditure }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section-devide mx-2">
+    <div class="row mg-fade-in">
+      <!-- Water Barrel -->
+      <div class="col-6 btn-hover2" (click)="onClickViewAllUtility(); onTabChange(1);">
+        <div class="card mb-2">
+          <div class="card-body dash-card">
+            <span class="dash-label">Water Barrel</span>
+            <div class="dash-count">
+              <span class="text-info">
+                <i class="bi bi-paint-bucket me-1"></i>
+                {{ MasterData.Water.Quantity }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Electric Unit -->
+      <div class="col-6 btn-hover2" (click)="onClickViewAllUtility(); onTabChange(2);">
+        <div class="card mb-2">
+          <div class="card-body dash-card">
+            <span class="dash-label">Electric Unit</span>
+            <div class="dash-count">
+              <span class="text-danger">
+                <i class="bi bi-speedometer2 me-1"></i>
+                {{ MasterData.Electric.Unit }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mg-fade-in">
+      <!-- Room Rent -->
+      <div class="col-6 btn-hover2" (click)="onClickViewAllUtility(); onTabChange(3);">
+        <div class="card mb-2">
+          <div class="card-body dash-card">
+            <span class="dash-label">Room Rent</span>
+            <div class="dash-count">
+              <span class="text-success">
+                <i class="bi bi-currency-rupee me-1"></i>
+                {{ MasterData.Rent.Amount }}.00
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Amount -->
+      <div class="col-6 btn-hover2" (click)="onClickViewAllUtility(); onTabChange(4);">
+        <div class="card mb-2">
+          <div class="card-body dash-card">
+            <span class="dash-label">Target Amount</span>
+            <div class="dash-count">
+              <span class="text-primary">
+                <i class="bi bi-currency-rupee me-1"></i>
+                {{ MasterData.TargetAmount.Amount }}.00
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row py-2">
+      <div class="col-6">
+        <span class="act-label">Transactions</span>
+      </div>
+      <div class="col-6 text-end" (click)="onClickViewAllItems();">
+        <span class="act-label2 btn-hover2">View All</span>
+      </div>
+    </div>
+    <div class="row mg-fade-up" *ngFor="let i of LastFourItems">
+      <div class="col-12">
+        <div class="card mb-2">
+          <div class="card-body tran-body">
+            <div class="row tran-card">
+              <div class="col-2">
+                <div class="tran-image">
+                  <i class="bi bi-person"></i>
+                </div>
+              </div>
+              <div class="col-7">
+                <div class="tran-owner">
+                  <p class="m-0">{{i.UserName}}</p>
+                </div>
+                <div class="tran-desc">
+                  <p class="m-0">{{i.Description}}</p>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="tran-amt">
+                  <p class="m-0"><i class="bi bi-currency-rupee me-1"></i>{{i.Amount}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row py-2">
+      <div class="col-6">
+        <span class="act-label">Grocery</span>
+      </div>
+      <div class="col-6 text-end" (click)="onClickViewAllGrocery();">
+        <span class="act-label2 btn-hover2">View All</span>
+      </div>
+    </div>
+    <div class="scroll-container" #scrollContainer>
+      <div class="scroll-wrapper">
+        <div class="scroll-item" *ngFor="let item of LastSixGrocery">
+          <div class="card mb-2">
+            <div class="card-body py-3 px-1">
+              <p class="hor-icon"><i class="bi bi-person"></i></p>
+              <p class="hor-des">
+                {{ item.Description.length > 9 ? (item.Description | slice:0:9) + '...' : item.Description }}
+              </p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-6">
+        <div class="card mb-2">
+          <div class="card-body">
+            This is some
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card mb-2">
+          <div class="card-body">
+            This is some
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+<div *ngIf="step==2">
+  <div class="card-body" style="background-color: #fff;">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+      <div class="col-2" (click)="onClickBackDashboard();"><span class="btn-hover2"><i
+            class="bi bi-chevron-left"></i></span></div>
+      <div class="col-8 text-center"><span class="page-head">Utilities</span></div>
+      <div class="col-2"></div>
+    </div>
+
+    <nav class="mx-2">
+      <div class="nav nav-tabs tab-spec" id="nav-tab" role="tablist">
+        <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+          [ngClass]="{'active': tabSelected === 1, 'in_active': tabSelected !== 1}" (click)="onTabChange(1)">
+          <i class="me-1"
+            [ngClass]="{'bi bi-droplet-fill': tabSelected === 1,'bi bi-droplet': tabSelected !== 1}"></i>Water
+        </button>
+        <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+          [ngClass]="{'active': tabSelected === 2, 'in_active': tabSelected !== 2}" (click)="onTabChange(2)">
+          <i class="me-1"
+            [ngClass]="{'bi bi-plug-fill': tabSelected === 2,'bi bi-plug': tabSelected !== 2}"></i>Electric
+        </button>
+        <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+          [ngClass]="{'active': tabSelected === 3, 'in_active': tabSelected !== 3}" (click)="onTabChange(3)">
+          <i class="me-1"
+            [ngClass]="{'bi bi-houses-fill': tabSelected === 3,'bi bi-houses': tabSelected !== 3}"></i>Rent
+        </button>
+        <button class="nav-link" id="nav-Roll-tab" type="button" role="tab" aria-controls="nav-Roll"
+          [ngClass]="{'active': tabSelected === 4, 'in_active': tabSelected !== 4}" (click)="onTabChange(4)">
+          <i class="me-1"
+            [ngClass]="{'bi bi-houses-fill': tabSelected === 4,'bi bi-houses': tabSelected !== 4}"></i>Target
+        </button>
+      </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+      <!-- Tab 1 -->
+      <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 1}" role="tabpanel"
+        aria-labelledby="nav-Roll-tab">
+        <div class="row tab-border py-3 mx-2 align-items-center">
+          <div class="col-md-12 mt-3">
+            <div class="table-responsive common_Table">
+              <table id="example" datatable [dtOptions]="dtOptions" class="display table table-bordered table-striped table-hover"
+                style="width: 100%">
+                <colgroup>
+                  <col style="width: 8%" />
+                  <col style="width: 10%" />
+                  <col style="width: 20%" />
+                  <col style="width: 47%" />
+                  <col style="width: 15%" />
+                </colgroup>
+                <thead style="background-color: #69757d">
+                  <tr>
+                    <th class="text-center">Sl</th>
+                    <th class="text-center">User</th>
+                    <th class="text-center">EntryDate</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of UtilityDataDetailView.Water; let i = index">
+                    <td class="text-center" style="border-radius: 5px;"
+                      [ngStyle]="{'border-left':item.TransactionTypeID===2 ? '2px solid red' : '2px solid green' }">
+                      {{ i + 1 }}
+                    </td>
+                    <td class="text-start">{{ item.UserName }}</td>
+                    <td class="text-center">{{ item.EntryDate }}</td>
+                    <td class="text-start">{{ item.Quantity }}</td>
+                    <td class="text-end"><i class="bi bi-currency-rupee me-1"></i>{{ item.Amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2 -->
+      <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 2}" role="tabpanel"
+        aria-labelledby="nav-Roll-tab">
+        <div class="row tab-border py-3 mx-2 align-items-center">
+          <div class="col-md-12 mt-3">
+            <div class="table-responsive common_Table">
+              <table id="example" datatable [dtOptions]="dtOptions" class="display table table-bordered table-striped table-hover"
+                style="width: 100%">
+                <colgroup>
+                  <col style="width: 8%" />
+                  <col style="width: 12%" />
+                  <col style="width: 10%" />
+                  <col style="width: 10%" />
+                  <col style="width: 10%" />
+                  <col style="width: 10%" />
+                  <col style="width: 25%" />
+                  <col style="width: 15%" />
+                </colgroup>
+                <thead style="background-color: #69757d">
+                  <tr>
+                    <th class="text-center">Sl</th>
+                    <th class="text-center">User</th>
+                    <th class="text-center">EntryDate</th>
+                    <th class="text-center">FromDate</th>
+                    <th class="text-center">ToDate</th>
+                    <th class="text-center">Unit</th>
+                    <th class="text-center">Description</th>
+                    <th class="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of UtilityDataDetailView.Electric; let i = index">
+                    <td class="text-center" style="border-radius: 5px;"
+                      [ngStyle]="{'border-left':item.TransactionTypeID===2 ? '2px solid red' : '2px solid green' }">
+                      {{ i + 1 }}
+                    </td>
+                    <td class="text-start">{{ item.UserName }}</td>
+                    <td class="text-center">{{ item.EntryDate }}</td>
+                    <td class="text-center">{{ item.FromDate }}</td>
+                    <td class="text-center">{{ item.ToDate }}</td>
+                    <td class="text-start">{{ item.Unit }}</td>
+                    <td class="text-start">{{ item.Description }}</td>
+                    <td class="text-end"><i class="bi bi-currency-rupee me-1"></i>{{ item.Amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 3}" role="tabpanel"
+        aria-labelledby="nav-Roll-tab">
+        <div class="row tab-border py-3 mx-2 align-items-center">
+          <div class="col-md-12 mt-3">
+            <div class="table-responsive common_Table">
+              <table id="example" datatable [dtOptions]="dtOptions" class="display table table-bordered table-striped table-hover"
+                style="width: 100%">
+                <colgroup>
+                  <col style="width: 8%" />
+                  <col style="width: 10%" />
+                  <col style="width: 20%" />
+                  <col style="width: 27%" />
+                  <col style="width: 35%" />
+                </colgroup>
+                <thead style="background-color: #69757d">
+                  <tr>
+                    <th class="text-center">Sl</th>
+                    <th class="text-center">User</th>
+                    <th class="text-center">Month</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of UtilityDataDetailView.Rent; let i = index">
+                    <td class="text-center" style="border-radius: 5px;"
+                      [ngStyle]="{'border-left':item.TransactionTypeID===2 ? '2px solid red' : '2px solid green' }">
+                      {{ i + 1 }}
+                    </td>
+                    <td class="text-start">{{ item.UserName }}</td>
+                    <td class="text-start">{{ item.Month }}</td>
+                    <td class="text-center">{{ item.EntryDate }}</td>
+                    <td class="text-end"><i class="bi bi-currency-rupee me-1"></i>{{ item.Amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4 -->
+      <div class="tab-pane fade navBodyBorder" [ngClass]="{'show active': tabSelected === 4}" role="tabpanel"
+        aria-labelledby="nav-Roll-tab">
+        <div class="row tab-border py-3 mx-2 align-items-center">
+          <div class="col-md-12 mt-3">
+            <div class="table-responsive common_Table">
+              <table id="example" datatable [dtOptions]="dtOptions" class="display table-striped table table-bordered table-hover"
+                style="width: 100%">
+                <colgroup>
+                  <col style="width: 8%" />
+                  <col style="width: 62%" />
+                  <col style="width: 30%" />
+                </colgroup>
+                <thead style="background-color: #69757d">
+                  <tr>
+                    <th class="text-center">Sl</th>
+                    <th class="text-center">Month Name</th>
+                    <th class="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of UtilityDataDetailView.TargetAmount; let i = index">
+                    <td class="text-center" style="border-radius: 5px;"
+                      [ngStyle]="{'border-left':item.TransactionTypeID===2 ? '2px solid red' : '2px solid green' }">
+                      {{ i + 1 }}
+                    </td>
+                    <td class="text-start">{{ item.MonthName }}</td>
+                    <td class="text-end"><i class="bi bi-currency-rupee me-1"></i>{{ item.Amount}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="step==3">
+  <div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+      <div class="col-2" (click)="onClickBackDashboard();"><span class="btn-hover2"><i
+            class="bi bi-chevron-left"></i></span></div>
+      <div class="col-8 text-center"><span class="page-head">All Expenses</span></div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+      <div class="col-lg-12 p-1">
+        <div class="table-responsive common_Table">
+          <p class="ms-1 mt-2 mb-0"><span class="ent-date me-1"><i class="bi bi-circle-fill me-1"></i>Expense Date</span><span class="imt-date ms-2"><i class="bi bi-circle-fill me-1"></i>Entry Date</span></p>
+          <table id="example" datatable [dtOptions]="dtOptions" class="display table table-bordered table-striped table-hover"
+            style="width: 100%">
+            <colgroup>
+              <col style="width: 8%" />
+              <col style="width: 10%" />
+              <col style="width: 29%" />
+              <col style="width: 40%" />
+              <col style="width: 13%" />
+          </colgroup>
+          <thead style="background-color: #69757d">
+              <tr>
+                  <th class="text-center v-mid">Sl</th>
+                  <th class="text-center v-mid">User</th>
+                  <th class="text-center v-mid">Date</th>
+                  <th class="text-center v-mid">Description</th>
+                  <th class="text-center v-mid">Amount</th>
+              </tr>
+          </thead>
+            <tbody>
+              <tr *ngFor="let item of cMonthAllItems; let i = index">
+                <td class="text-center v-mid" style="border-radius: 5px;"
+                  [ngStyle]="{'border-left':item.TransactionTypeID===2 ? '2px solid red' : '2px solid green' }">
+                  {{ i + 1 }}
+                </td>
+                <td class="text-start v-mid">{{ item.UserName }}</td>
+                <td class="text-center v-mid">
+                  <p class="m-0 ent-date">{{ item.Date }}</p>
+                  <p class="m-0 imt-date">{{ item.ImportDate }}</p>
+              </td>
+                <td class="text-start v-mid">{{ item.Description }}</td>
+                <td class="text-end v-mid"><i class="bi bi-currency-rupee me-1"></i>{{ item.Amount}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="step==4">
+  <div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+      <div class="col-2" (click)="onClickBackDashboard();"><span class="btn-hover2"><i
+            class="bi bi-chevron-left"></i></span></div>
+      <div class="col-8 text-center"><span class="page-head">All Grocery</span></div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+      <div class="col-12 p-1">
+        <div class="table-responsive common_Table">
+          <table id="example" datatable [dtOptions]="dtOptions" class="display table table-bordered table-striped table-hover"
+            style="width: 100%">
+            <!-- <colgroup>
+              <col style="width: 8%" />
+              <col style="width: 22%" />
+              <col style="width: 70%" />
+            </colgroup> -->
+            <thead style="background-color: #69757d">
+              <tr>
+                <th class="text-center">Sl</th>
+                <th class="text-center">User</th>
+                <th class="text-center">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of AllGrocery; let i = index">
+                <td class="text-center" style="border-radius: 5px;"
+                  [ngStyle]="{'border-left':item.IsActive===2 ? '2px solid red' : '2px solid green' }">
+                  {{ i + 1 }}
+                </td>
+                <td class="text-start">{{ item.UserName }}</td>
+                <td class="text-start">{{ item.Description }}<span>-</span>{{item.Quantity}}{{item.QuantityType}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

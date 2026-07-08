@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* @import "../node_modules/datatables.net-dt/css/jquery.dataTables.css"; */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+/* @import "node_modules/bootstrap-icons/font/bootstrap-icons.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css"; */
+@import '../src/assets/css/dashboard.css';
+@import '../src/assets/css/form-input.css';
+.cursor-loader {
+  cursor: wait;
+}
+.page-head{
+  font-size: .9rem;
+  font-weight: 600;
+  color: blueviolet;
+}
+.nav__img{
+  width: 32px;
+  border-radius: 50%;
+}
+.common_Table th{
+  background-color: lightgray !important;
+}
+@keyframes fadeUp {
+  0% {
+      transform: translateY(10px);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.mg-fade-up {
+  animation: fadeUp 0.7s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+  0% {
+      transform: scale(0.9);
+      opacity: 0;
+  }
+
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+.mg-fade-in{
+  animation: fadeInScale 0.7s ease-in-out;
+}

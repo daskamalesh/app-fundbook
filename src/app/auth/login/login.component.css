@@ -1,0 +1,205 @@
+@keyframes fadeUp {
+  0% {
+      transform: translateY(10px);
+      opacity: 0;
+  }
+
+  100% {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.fg-fade-up {
+  animation: fadeUp 0.9s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+  0% {
+      transform: scale(0.9);
+      opacity: 0;
+  }
+
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+.fg-fade-in{
+  animation: fadeInScale 0.9s ease-in-out;
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-10px) scale(0.9); /* Start slightly above */
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1); /* Move to normal position */
+    opacity: 1;
+  }
+}
+
+.fg-fade-down {
+  animation: fadeInDown 0.9s ease-in-out;
+}
+
+
+
+/* .main-container {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background: url(../../../assets/images/login_background.png) no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; 
+} */
+.main-container {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  overflow: hidden; /* Prevents scrolling */
+}
+
+.main-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../../assets/images/login_background.png) no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
+
+
+.custom-container {
+  overflow: hidden;
+  padding: 20px;
+  text-align: center;
+}
+
+.custom-header img {
+  width: 44%;
+}
+
+.custom-header h4 {
+  font-weight: 600;
+}
+
+.custom-header p {
+  color: gray;
+}
+
+.login-form {
+  margin-top: 40px;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #005F50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.social-login {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-login i {
+  font-size: 24px;
+  cursor: pointer;
+  color: #005F50;
+}
+
+.signup {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  body {
+    height: auto;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .custom-header {
+    padding: 30px 15px;
+  }
+
+  .custom-header h1 {
+    font-size: 24px;
+  }
+
+  .custom-header p {
+    font-size: 14px;
+  }
+
+  .login-form {
+    margin-top: 30px;
+  }
+
+  .login-btn {
+    font-size: 14px;
+  }
+
+  .social-login i {
+    font-size: 20px;
+  }
+
+  .signup {
+    font-size: .9rem;
+  }
+}
+
+.validation-msg {
+  text-align: left;
+  position: absolute;
+  left: 10px;
+  top: 48px;
+}
+
+.eye-btn {
+  position: absolute;
+  top: 12px;
+  right: 28px;
+  color: gray;
+}
+
+.wrong-cred {
+  margin-top: -6px;
+  margin-bottom: 0.5rem;
+  color: red;
+}
+.f-img{
+  width:100%;
+  height: 140px;
+}
+footer{
+  position: absolute;
+  bottom: 0;
+}

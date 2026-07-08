@@ -1,0 +1,39 @@
+<body>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+        <nav class="nav container main-header">
+            <!-- <a href="#" class="nav__logo">FundBook</a> -->
+            <!-- <img class="dash-logo" src="../../../assets/images/logo_dash.png"> -->
+            <!-- <div class="d-flex">
+                <div><img class="dash-logo" src="../../../assets/images/loader_img.png"></div>
+                <div><span class="nav__logo">FundBook</span></div>
+              </div> -->
+            <div>
+                <p class="nav__logo m-0">FundBook</p>
+                <p class="nav__slo m-0">Smart Finances, Smart Future !</p>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="bottom-menu-ul nav__list">
+                    <li class="nav__item" *ngFor="let m of allMenu;" (click)="onClickMenu(m);"
+                        [ngStyle]="{'color': m.isActiveMenu ? 'darkviolet' : ''}">
+                        <a href="" [routerLink]="m.PageName" class="nav__link"
+                            [ngClass]="{'active-link': m.isActiveMenu}">
+                            <i class="{{m.IconCSSClass}} nav__icon" *ngIf="!m.isActiveMenu"></i>
+                            <i class="{{m.AlternateIconCSSClass}} nav__icon" *ngIf="m.isActiveMenu"></i>
+                            <span class="nav__name">{{m.DisplayText}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <img src="../../../assets/images/profile.png" alt="profile" class="nav__img" routerLink="profile">
+        </nav>
+    </header>
+
+    <main class="main-cont">
+        <router-outlet></router-outlet>
+    </main>
+
+
+</body>

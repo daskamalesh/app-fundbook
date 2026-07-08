@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "http://fundbook.somee.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

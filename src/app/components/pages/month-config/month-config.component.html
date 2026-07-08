@@ -1,0 +1,148 @@
+<div class="card-body main-card">
+    <div class="row py-2 mb-2 mx-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="col-2"><span (click)="BackToDashboard();"><i class="bi bi-chevron-left"></i></span></div>
+        <div class="col-8 text-center"><span class="page-head">Month Configure</span></div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" *ngIf="step==1">
+            <div class="col-12 mb-2 p-1">
+            <div class="table-responsive common_Table">
+                <table id="example"
+                    class="display table table-bordered table-striped table-hover" style="width: 100%">
+                    <colgroup>
+                        <col style="width: 8%" />
+                        <col style="width: 12%" />
+                        <col style="width: 18%" />
+                        <col style="width: 18%" />
+                        <col style="width: 12%" />
+                        <col style="width: 10%" />
+                        <col style="width: 22%" />
+                    </colgroup>
+                    <thead style="background-color: #69757d">
+                        <tr>
+                            <th class="text-center">Sl</th>
+                            <th class="text-center">Month</th>
+                            <th class="text-center">Start</th>
+                            <th class="text-center">End</th>
+                            <th class="text-center">IsCurrent</th>
+                            <th class="text-center">Deactive</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of returnResult; let i = index">
+                            <td class="text-center v-mid" style="border-radius: 5px;"
+                                [ngStyle]="{'border-left':item.IsCurrent===true ? '2px solid red' : '2px solid green' }">
+                                {{ i + 1 }}
+                            </td>
+                            <td class="text-start v-mid">{{ item.Description }}</td>
+                            <td class="text-end v-mid">{{ item.StartDate }}</td>
+                            <td class="text-end v-mid">{{ item.EndDate }}</td>
+                            <td class="text-center v-mid">{{ item.IsCurrent }}</td>
+                            <td class="text-center v-mid">{{ item.IsActive }}</td>
+                            <td class="text-center v-mid">
+                                <div class="d-flex justify-content-around">
+                                    <button class="btn btn-outline-secondary btn-sm" role="button" (click)="onClickEdit(item)">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row mx-2 mt-2 align-items-center" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" *ngIf="step==2">
+    <div class="col-md-12 mt-3">
+        <form name="frmTab" #frmTab="ngForm" (ngSubmit)="frmTab.form.valid && onClickSubmit(frmTab)">
+            <div class="row">
+                <!-- Entry Date -->
+                 <div class="col-12">
+                    <!-- Start -->
+                    <div class="col-12 px-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtMonth"
+                                name="txtMonth" [(ngModel)]="record.Description"
+                                placeholder="" #txtMonth="ngModel" required disabled="true">
+                            <label class="my-label" for="txtMonth">
+                                <i class="bi bi-calendar-check text-danger me-1"></i>Month
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab.submitted && txtMonth.invalid">
+                                <small class="text-danger" *ngIf="txtMonth.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter month
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="col-md-6 d-flex">
+                    <!-- Start -->
+                    <div class="col-6 px-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtStartDate"
+                                name="txtStartDate" [(ngModel)]="record.StartDate"
+                                placeholder="" #txtStartDate="ngModel" required disabled="true">
+                            <label class="my-label" for="txtStartDate">
+                                <i class="bi bi-calendar-day text-danger me-1"></i>Start Date
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab.submitted && txtStartDate.invalid">
+                                <small class="text-danger" *ngIf="txtStartDate.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter start date
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End -->
+                    <div class="col-6 px-1">
+                        <div class="form-group">
+                            <input type="text" class="form-control my-input" id="txtEndDate"
+                                name="txtEndDate" [(ngModel)]="record.EndDate"
+                                placeholder="" #txtEndDate="ngModel" required disabled="true">
+                            <label class="my-label" for="txtEndDate">
+                                <i class="bi bi-calendar-day text-danger me-1"></i>End Date
+                                <span class="star text-danger ms-1">*</span>
+                            </label>
+                            <div *ngIf="frmTab.submitted && txtEndDate.invalid">
+                                <small class="text-danger" *ngIf="txtEndDate.errors?.['required']">
+                                    <i class="bi bi-exclamation-circle me-1"></i>Please enter end date
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <div class="switch_wrapper mt-2">
+                            <label class="switch">
+                                <input type="checkbox" id="chkInCurrent" name="chkInCurrent" [(ngModel)]="record.IsCurrent" #chkInCurrent="ngModel">
+                                <span class="slider round" title="{{record.IsCurrent==true?'Yes':'No'}}"></span>
+                            </label>
+                            <label for="chkInCurrent" class="switch_name ms-1">Is Current</label>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="switch_wrapper mt-2">
+                            <label class="switch">
+                                <input type="checkbox" id="chkInActive" name="chkInActive" [(ngModel)]="record.IsActive" #chkInActive="ngModel">
+                                <span class="slider round" title="{{record.IsActive==true?'Yes':'No'}}"></span>
+                            </label>
+                            <label for="chkInActive" class="switch_name ms-1">Is Active</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Save Button -->
+                <div class="row" style="color: #222; padding: 0.75rem; margin: 0;">
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-outline-secondary" role="button">
+                            <i class="bi bi-save2" style="margin-right: 5px;"></i>Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
